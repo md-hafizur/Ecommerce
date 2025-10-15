@@ -24,7 +24,7 @@ export function ProductCard({
 
   return (
     <Card 
-      className={`group relative overflow-hidden ${isHovered ? 'border border-gray-250' : 'border border-transparent'} hover:shadow-lg transition-all duration-300 h-full bg-primary-foreground`}
+      className={`group relative overflow-hidden ${isHovered ? 'border border-gray-250' : 'border border-transparent'} hover:shadow-lg transition-all duration-300 h-full bg-white/80 dark:bg-gray-900/80`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -40,7 +40,7 @@ export function ProductCard({
         </h3>
 
         {/* Product Image */}
-        <div className="relative aspect-square mb-6 bg-primary-foreground overflow-hidden flex items-center justify-center">
+        <div className="relative aspect-square mb-6 bg-white/80 dark:bg-gray-900/80 overflow-hidden flex items-center justify-center">
           <Image
             src={product.image}
             alt={product.name}
