@@ -1,11 +1,10 @@
 // components/ProductCard.tsx
 import Image from 'next/image';
 import { ShoppingCart, Heart, RefreshCw } from 'lucide-react';
-import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import { Product } from '@/types/product';
-
+import { Separator } from '@/components/ui/separator';
+import { useState } from 'react';
 interface ProductCardProps {
   product: Product;
   onAddToCart?: (productId: string) => void;
@@ -19,16 +18,16 @@ export function ProductCard({
   onWishlist,
   onCompare 
 }: ProductCardProps) {
-  const [isHovered, setIsHovered] = useState(false);
   const hasDiscount = product.originalPrice && product.originalPrice > product.price;
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <Card 
-      className={`group relative overflow-hidden ${isHovered ? 'border border-gray-250' : 'border border-transparent'} hover:shadow-lg transition-all duration-300 h-full bg-white/80 dark:bg-gray-900/80`}
+    <div 
+     className={`group relative overflow-hidden ${isHovered ? 'border rounded-md border-gray-250' : 'border-r-1 rounded-md'} hover:shadow-lg transition-all duration-300 h-full bg-white/80 dark:bg-gray-900/80`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <CardContent className="p-6">
+      <div className="p-6">
         {/* Categories */}
         <div className="text-xs text-primary mb-1 min-h-[16px]">
           {product.categories.join(', ')}
@@ -74,7 +73,7 @@ export function ProductCard({
         </div>
 
         {/* Hover Actions - Wishlist & Compare */}
-        <div className="flex items-center justify-center gap-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 border-t border-primary/10 pt-4">
+        <div className="flex h-5 items-center justify-center gap-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pt-4">
           {onWishlist && (
             <button
               onClick={() => onWishlist(product.id)}
@@ -83,6 +82,9 @@ export function ProductCard({
               <Heart className="h-4 w-4" />
               <span>Wishlist</span>
             </button>
+          )}
+          {onWishlist && onCompare && (
+            <Separator orientation="vertical" className="h-1/2" />
           )}
           {onCompare && (
             <button
@@ -94,7 +96,7 @@ export function ProductCard({
             </button>
           )}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }
